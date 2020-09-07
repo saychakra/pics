@@ -4,7 +4,10 @@ import SearchBar from "./SearchBar";
 
 class App extends React.Component {
   state = { images: [] };
-  async onSearchSubmit(term) {
+
+  // this needs to be turned into a arrow function for binding 'this'. Otherwise it will throw error.
+  // look at the previous commit to see how it was before.
+  onSearchSubmit = async (term) => {
     const response = await axios.get("https://api.unsplash.com/search/photos", {
       params: { query: term },
       headers: {
@@ -15,7 +18,7 @@ class App extends React.Component {
     console.log(this);
 
     this.setState({ images: response.data.results });
-  }
+  };
 
   render() {
     return (
