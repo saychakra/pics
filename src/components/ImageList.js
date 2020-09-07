@@ -1,16 +1,13 @@
+import "./ImageList.css";
 import React from "react";
+import ImageCard from "./ImageCard";
 
 const ImageList = (props) => {
   const images = props.images.map((image) => {
-    // note: key should be added to the root property of any tag.
-    // so if we had a <div> wrapped around the <img/>, then we would be specifying the keys on the <div>
-    return (
-      <img key={image.id} src={image.urls.regular} alt={image.description} />
-      // we could have also used js destructuring, but it looked a bit tough for me!
-    );
+    return <ImageCard key={image.id} image={image} />;
   });
 
-  return <div>{images}</div>;
+  return <div className="image-list">{images}</div>;
 };
 
 export default ImageList;
