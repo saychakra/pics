@@ -9,11 +9,14 @@ class ImageCard extends React.Component {
 
   //console logging the entire application after the component gets rendered
   componentDidMount() {
-    // here if we console log the imageRef, we will be able to see the clientHeight
-    // but console logging the clientHeight within this componentDidMount() is too early, because the
-    // image is not downloaded completely from the api source and before that the console log is taking place
-    console.log(this.imageRef.current.clientHeight);
+    this.imageRef.current.addEventListener("load", this.setSpans);
+    // here setSpans is a callback to the evenlistener and hence needs to be bounded
+    // use => function for directly making it bounded
   }
+
+  setSpans = () => {
+    console.log(this.imageRef.current.clientHeight);
+  };
 
   render() {
     // destructuring the reusable compoents for code readability
