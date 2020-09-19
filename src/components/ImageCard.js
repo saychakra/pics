@@ -4,6 +4,7 @@ class ImageCard extends React.Component {
   //creating the reference for the image
   constructor(props) {
     super(props);
+    this.state = { spans: 0 };
     this.imageRef = React.createRef();
   }
 
@@ -15,7 +16,9 @@ class ImageCard extends React.Component {
   }
 
   setSpans = () => {
-    console.log(this.imageRef.current.clientHeight);
+    const height = this.imageRef.current.clientHeight;
+    const spans = Math.ceil(height / 10); // 10 - depends on the grid auto rows in css section
+    this.setState({ spans: spans }); // could have also written as this.setStates({spans}) // because the names spans: spans are same
   };
 
   render() {
@@ -23,7 +26,8 @@ class ImageCard extends React.Component {
     const { description, urls } = this.props.image;
 
     return (
-      <div>
+      // ES2015 syntax for passing the span value as a style to the div
+      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
         <img ref={this.imageRef} alt={description} src={urls.regular} />
       </div>
     );
